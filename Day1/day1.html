@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="center">
+    <h1>JavaScript</h1>
+    <p>JavaScript (JS) is a case sensitive language !</p>
+    <p>
+        JavaScript (JS) is a versatile programming language primarily used for creating interactive and dynamic web content. It enables developers to add features like animations, form validations, and user interactions to websites</p>
+        <div class="one">
+        <button id="hello" class="pot" onclick="change()">Click !</button>
+        <h3 id="clickme">By click the button text will be changed !</h3>
+        </div>
+    </div>
+        <div class="one-1">
+            <button class="pot" onclick="alert('Inline js')">Alert</button>
+            <button class="pot" id="hel" onclick="noob()">Alert 1</button>
+            <h3 id="blow"> Hi </h3>
+        </div>
+        <div class="one">
+            <button class="pot" id="he" onclick="pro()">Alert 2</button>
+            <h3 id="blower"> Hello ! </h3>
+        </div>
+        <script>
+            let program = document.getElementById("blow");
+            let hel = document.getElementById("hel");
+            function noob(){
+                program.textContent = "Internal Js";
+                alert("Internal Js");
+                hel.textContent = "internal";
+            }
+        </script>
+        <script src="script.js">
+            
+        </script>
+</body>
+</html>

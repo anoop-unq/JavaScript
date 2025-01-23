@@ -1,0 +1,21 @@
+.head11{
+    color: blue;
+    font-weight: 750;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 11%;
+}
+.link{
+    font-size: 31px;
+    color: red;
+    text-decoration: none;
+    padding-left: 5%;
+
+}
+.link:active{
+    color: green;
+}
+.link:hover{
+    color: blue;
+}
