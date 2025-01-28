@@ -22,6 +22,11 @@
     flex-direction: column;
     padding-top: 21px;
     padding-bottom: 2%;
+    /* background-color: rgb(2, 104, 193); */
+    border-radius: 25px;
+    /* position: relative;
+    height: 80px; */
+    margin-top: 11px;
 }
 .input-element label{
     font-size: 1.5rem;
@@ -29,14 +34,23 @@
 .input-element input{
     /* width: 100%; */
     border-radius: 3px;
-    border: 1;
-    height: 25px;
+    /* border: 1;
+    height: 40px; */
     padding-bottom: 5px;
     font-size: 1.3rem;
+    /* position: absolute;
+    top: 30%;
+    left: 12.5%;
+    border: none;
+    outline-style: none; */
 }
+
 input{
     display: flex;
     align-items: center;
+    /* border: none; */
+    /* border: 1px solid rgb(0, 0, 0);
+    outline: 1px solid rgb(0, 0, 0); */
 }
 .list-items{
     margin: 11px 50px;
@@ -46,12 +60,21 @@ input{
     max-width: 365px;
     margin-left: auto;
     margin-right: auto;
+    list-style: disc;
 }
 .list-items>li{
     margin-bottom: 15px;
 }
 .list-items-1{
     margin-bottom: 15px;
+    font-size: 1.15rem;
+    color: #372828;
+}
+#gym{
+    color: red;
+}
+#gymGreen{
+    color: rgb(22, 85, 21);
 }
 .button-element{
     display: flex;
@@ -59,6 +82,7 @@ input{
     align-items: center;
 }
 .button-2{
+    margin-top: 25px;
     width: 125px;
     height: 4vh;
     border-radius: 3px;
@@ -71,8 +95,8 @@ input{
     font-weight: 550;
 }
 .button-1{
-    width: 125px;
-    height: 4vh;
+    width: 150px;
+    height: 5vh;
     border-radius: 3px;
     margin: 25px 10px;
     border: none;
@@ -83,12 +107,24 @@ input{
     color: rgb(0, 0, 0);
     font-weight: 550;
 }
+.button-00{
+    width: 150px;
+    height: 5vh;
+    border-radius: 3px;
+    margin: 25px 10px;
+    border: none;
+    transition: 0.75s;
+}
+.button-00:hover{
+    background-color: rgb(60, 1, 255);
+    color: #fff;
+    font-weight: 550;
+}
 #result{
     font-size: 1.3rem;
     text-align: center;
     color: black;
     font-weight: 550;
-    background-color: red;
     background: linear-gradient(to left, rgb(210, 210, 210), rgb(255, 240, 240));
 }
 .head-00{
@@ -104,18 +140,9 @@ input{
     flex-direction: column;
     padding-top: 21px;
     padding-bottom: 2%;
-   
+    background-color: rgb(244, 202, 184);
+    width: 100%;
 }
-.input-element-1{
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 21px;
-    padding-bottom: 2%;
-}
-
 .head-44{
     margin-top: 15px;
     color: red;
@@ -167,7 +194,10 @@ input{
         font-size: 1.2rem;
         max-width: 600px;
     }
-    .input-element{
+    .input-element label{
+        font-size: 1rem;
+    }
+    .input-element {
         display: flex;
         justify-content: center;
         gap: 15px;
@@ -175,25 +205,40 @@ input{
         flex-direction: column;
         padding-top: 21px;
         padding-bottom: 2%;
+        /* background-color: rgb(150, 177, 215); */
+        mix-blend-mode: transparent;
+        border-radius: 25px;
+        position: relative;
+        height: 80px;
+        margin-top: 11px;
     }
-    .list-items-1{
-        margin-bottom: 15px;
-        font-size: 18px!important;
-        }
     .input-element label{
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
     .input-element input{
         /* width: 100%; */
-        border-radius: 7px;
+        border-radius: 3px;
         border: 1;
-        height: 25px;
+        height: 40px;
         padding-bottom: 5px;
         font-size: 1.3rem;
+        position: absolute;
+        top: 30%;
+        left: 12.5%;
         border-end-end-radius: 20px;
         border-start-end-radius: 0;
         border-end-start-radius: 0;
         border-start-start-radius: 20px;
+        border: none;
+        outline-style: none;
+    }
+    
+    input:hover{
+        display: flex;
+        align-items: center;
+        /* border: none; */
+        border: 1px solid rgb(0, 0, 0);
+        outline: 1px solid rgb(0, 0, 0);
     }
     #num{
         text-indent: 11px;

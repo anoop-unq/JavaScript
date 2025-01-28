@@ -1,11 +1,11 @@
 const number = document.getElementById("num");
 const result = document.getElementById("result");
 
-function submit(){
+function more(){
     let numless = number.value;
     if(numless==="")
         {
-        result.textContent="Please Enter a number !";
+        result.textContent="Please Enter a day !";
     }
     else if(numless==="1"){
         result.textContent="Comparison Operator";
@@ -208,9 +208,9 @@ function submit(){
                 // console.log(inputuserValue1);
                 secondE1.appendChild(headOne);
                 secondE1.appendChild(resultOne);
-                displayText.appendChild(secondE1);
-                result.appendChild(displayText);
-                // result.appendChild(secondE1);
+                displayText.appendChild(secondE1); // This code for single time button Action (Button).
+                result.appendChild(displayText); // This code for single time button Action (Button).
+                // result.appendChild(secondE1); 
                                    
            
             }
@@ -696,8 +696,71 @@ function submit(){
             ageless.value="";
     }
     }
+    else if(numless === "6"){
+       
+        result.textContent="Check the number Even (or) Odd";
+        let breakEl = document.createElement('br');
+        result.appendChild(breakEl);
+        // let breakE2 = document.createElement('br');
+        // result.appendChild(breakE2);
+        let oneMan = document.createElement('div');
+        oneMan.classList.add("input-element-1");
+        oneMan.id = "star";
+        let numberone = document.createElement('label');
+        numberone.textContent="Enter Number :";
+        numberone.classList.add('label');
+        let inputElement = document.createElement('input');
+        inputElement.type = "number";
+        inputElement.classList.add("compare-class");
+        inputElement.id = "age";
+
+        let breakE3 = document.createElement('br');
+        result.appendChild(breakE3);
+
+        oneMan.appendChild(numberone);
+        oneMan.appendChild(inputElement);
+        result.appendChild(oneMan);
+
+        let twoMan = document.createElement('button');
+        twoMan.classList.add("button-1");
+        twoMan.textContent = "Check";
+        twoMan.id = "comparisonResults";
+        result.appendChild(twoMan);
+
+
+        let displayText = document.createElement('h4');
+        displayText.id="displayResult";
+        result.appendChild(displayText);
+
+        comparisonResults.onclick = function()
+        {
+            let userSelection00 = document.getElementById('userSelection');
+            // let userSelection000 = userSelection00.value;
+            let ageless = document.getElementById('age');
+            let agee = ageless.value;
+
+            let displayResult0 = document.getElementById('displayResult');
+            if(agee === ""){
+                displayResult0.textContent = "Please enter a number "
+                displayResult0.classList.add("head-44");
+               }
+            else if(agee%2==0){
+                displayResult0.textContent = agee + " is a Even Number ";
+                displayResult0.style.color="red";
+                displayResult0.classList.add("result-one");
+            }
+            
+            else{
+                displayResult0.textContent = agee + " is a odd Number ";
+                displayResult0.style.color="rgb(117, 117, 118)";
+                displayResult0.classList.add("result-normal");
+            }
+            ageless.value="";
+    }
+    }
     else{
         result.textContent="Please Enter a number from (1-5) !";
     }
     number.value="";
 }
+more();
