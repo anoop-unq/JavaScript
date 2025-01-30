@@ -63,6 +63,10 @@
     /* position: relative;
     height: 80px; */
     margin-top: 11px;
+    width: 65%;    
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(to right ,rgb(245, 102, 102) , rgb(65, 65, 234));
 }
 .input-element input{
     /* width: 100%; */
@@ -184,6 +188,9 @@ input{
         position: relative;
         height: 80px;
         margin-top: 11px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
         background: linear-gradient(to right ,rgb(245, 102, 102) , rgb(65, 65, 234));
     }
     .input-element label{
