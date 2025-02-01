@@ -5,7 +5,7 @@ function more(){
     let numless = number.value;
     if(numless==="")
         {
-        result.textContent="Please Enter a day !";
+        result.textContent="Please enter a number";
     }
     else if(numless==="1"){
         result.textContent="Comparison Operator";

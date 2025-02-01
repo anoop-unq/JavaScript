@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Create a container div dynamically
+const container = document.createElement("div");
+container.id = "radio-container";
+document.body.appendChild(container); // Append container to the body
+
+// Create a label element
+const label = document.createElement("label");
+label.textContent = "Option 1"; // Text for the radio button
+
+// Create an input element (radio button)
+const radio = document.createElement("input");
+radio.type = "radio";
+radio.name = "myRadioGroup"; // Grouping for selection
+radio.value = "Option 1";
+radio.id = "radio1";
+
+// Append radio button to label
+label.prepend(radio);
+
+// Append label to the container
+container.appendChild(label);
+
+    </script>
+</body>
+</html>
