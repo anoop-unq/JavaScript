@@ -568,9 +568,9 @@ function more(){
                 
                }
             else if(Number(inputuserValue1)){
-              displayResult0.textContent="";
-                radio.innerHTML="";
-                displayText1.innerHTML="";
+                displayResult0.textContent="";
+                radio.innerHTML="";// for radio button repeatation
+                displayText1.innerHTML=""; // for check button not repeat when we click
                 // let multi = inputuserValue1*inputuserValue1;
                 // displayResult0.textContent=multi;
 
