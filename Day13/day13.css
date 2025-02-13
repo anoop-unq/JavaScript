@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: poppins,sans-serif;
 }
+
 .program{
     padding: 15px;
     /* margin: 50px; */
@@ -53,7 +54,7 @@
     outline: 0;
     font-size: 15px;
     font-weight: 458;
-    margin: 15px auto;
+    margin: 5px auto;
     color: #fff;
     font-family: sans-serif;
     transition: 0.5s
