@@ -1,5 +1,3 @@
-// Task 1: take prompt and Convert to Uppercase
-// Task 2: take prompt and Convert to Lowercase
 let mainElement = document.createElement('div');
 mainElement.classList.add("program");
 
@@ -316,7 +314,7 @@ submitBtnLess.onclick=function(){
         messageDisplayKey.textContent=` ${sum.join("")} its a palindrome`;
         }
         else{
-        messageDisplayKey.textContent=` ${sum} its not a palindrome`;
+        messageDisplayKey.textContent=` ${sum.join("")} its not a palindrome`;
 
         }
 
