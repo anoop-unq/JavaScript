@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="cardDay.css">
+</head>
+<body>
+    <div id="cartContainer"></div>
+    <div id="legend"></div>
+    <div class="total-container" id="access">
+        <div class="text-Center">
+        <h2 class="head-00">Total Price : <span id="totalPrice">$ 0.00</span></h2> 
+    </div>
+    </div>
+
+    <script>
+       
+function displayCartItems() {
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let cartContainer = document.getElementById("cartContainer"); 
+    cartContainer.innerHTML = ""; 
+
+    if (cartItems.length === 0) {
+        // cartContainer.innerHTML = "<p>Your cart is empty!</p>";
+        document.getElementById("totalPrice").textContent = "$0.00";
+              
+        let accessElement = document.getElementById('access')
+
+        accessElement.style.display="none"
+        
+      
+
+        let legend = document.getElementById('legend')
+
+        let mainMan = document.createElement('div')
+        mainMan.classList.add("main-man")
+
+        // let mainTwo = document.createElement('div')
+        // mainTwo.classList.add("main-two")
+
+        let mainImg = document.createElement('div')
+        mainImg.classList.add("main-img")
+
+        let mainImage = document.createElement('img')
+        mainImage.classList.add("main-image")
+        mainImage.src="logo.img.jpg"
+        mainImg.append(mainImage)
+
+        let message = document.createElement('h4')
+        message.classList.add("message")
+        message.textContent="Your Cart is "
+
+        let spanMsg = document.createElement('span')
+        spanMsg.classList.add("empty-msg")
+        spanMsg.textContent=" Empty !"
+        message.append(spanMsg)
+
+        let preMessage = document.createElement('p')
+        preMessage.classList.add("pre-message")
+        preMessage.textContent="Must add items on the cart before you proceed to checkout"
+
+
+        let anchorMain = document.createElement('div')
+   
+        let buttonReturn = document.createElement('button')
+        buttonReturn.textContent="Return"
+        buttonReturn.classList.add("button-return")
+
+        let buttonIcon = document.createElement('i')
+        buttonIcon.classList.add("fa-solid","fa-bag-shopping","lock")
+        buttonReturn.append(buttonIcon)
+        anchorMain.append(buttonReturn)
+        buttonReturn.addEventListener("click", function() {
+            window.location.href = "day15.html"; 
+        });
+        mainMan.append(mainImg,message,preMessage,anchorMain)
+        legend.append(mainMan)
+  
+    }
+    function updatePrice(quantity, itemId) {
+    let originalPriceElement = document.getElementById(`originalRateValue-${itemId}`);
+    let discountPriceElement = document.getElementById(`priceRateValue-${itemId}`);
+
+
+    let basePrice = parseFloat(originalPriceElement.dataset.basePrice);
+
+    let newTotal = quantity * basePrice;
+    let newDiscountPrice = newTotal * 50 / 100;
+
+    originalPriceElement.textContent = "$" + newTotal.toFixed(2);
+    discountPriceElement.textContent = "$" + newDiscountPrice.toFixed(2);
+     
+    updateTotalPrice(); 
+}
+function updateTotalPrice() {
+                let totalPrice = 0;
+                cartItems.forEach(item => {
+                    let quantity = parseInt(document.getElementById(`quantityComplex-${item.id}`).textContent);
+                    let basePrice = parseFloat(item.price);
+                    let discountedPrice = (basePrice * quantity * 50) / 100;
+                    totalPrice += discountedPrice;
+                });
+                if (cartItems.length === 0) {
+                        totalPrice = 0;
+                    }
+                document.getElementById("totalPrice").textContent = "$" + totalPrice.toFixed(2);
+            }
+
+        let mainLessIcon = document.createElement('div')
+        mainLessIcon.classList.add("main-less")
+
+        let mainManIcon = document.createElement('i')
+        mainManIcon.classList.add("fa-solid","fa-arrow-left","left")
+        mainManIcon.addEventListener("click",function(){
+            window.location.href="day15.html"
+        })
+        mainLessIcon.append(mainManIcon)
+        cartContainer.append(mainLessIcon)
+
+    cartItems.forEach(item => {
+
+      
+
+        let viewItemsCard = document.createElement('div');
+        viewItemsCard.classList.add("item-class");
+        viewItemsCard.id=`card-${item.id}`;
+        console.log(viewItemsCard);
+
+        let mediumContainer = document.createElement('div');
+        mediumContainer.classList.add("medium-container");
+
+        let sectionOperator = document.createElement('div')
+        sectionOperator.classList.add("section-operator")
+        
+        let twoItemCards = document.createElement('div')
+        twoItemCards.classList.add("two-items")
+
+        let cardOne = document.createElement('div');
+        cardOne.classList.add("image-container");
+
+        let imageBag = document.createElement('img');
+        imageBag.classList.add("card-image");
+        imageBag.src = item.image;
+
+        cardOne.append(imageBag);
+
+        let cardTwo = document.createElement('div')
+        cardTwo.classList.add("card-container")
+
+        let subBtn = document.createElement('button')
+        subBtn.classList.add("sub")
+        subBtn.textContent="-";
+        // subBtn.id="subtractValue"
+        subBtn.id = `subtractValue-${item.id}`;
+
+      
+
+        let qtyBtn = document.createElement('button')
+        qtyBtn.classList.add("quantity")
+        qtyBtn.textContent="Qty : "
+        // qtyBtn.id="quantityHighComplex"
+        qtyBtn.id = `quantityHighComplex-${item.id}`; 
+
+        let spanExpress = document.createElement('span')
+        spanExpress.classList.add("spanned")
+        spanExpress.textContent="1"
+        // spanExpress.id="quantityComplex"
+        spanExpress.id = `quantityComplex-${item.id}`;  // Unique ID for quantity text
+
+        qtyBtn.append(spanExpress)
+
+        let plusBtn = document.createElement('button')
+        plusBtn.classList.add("plus")
+        plusBtn.textContent="+"
+        // plusBtn.id="addValue"
+        plusBtn.id = `addValue-${item.id}`; 
+        
+        // subBtn.onclick=function(){
+        //     let updateItemE1 = document.getElementById('quantityComplex');
+        //     let displayValueE1 = updateItemE1.textContent;
+        //     let smoothValueE1 = parseInt(displayValueE1);
+        //     if(smoothValueE1 > 1){
+        //         smoothValueE1--;
+        //         updateItemE1.textContent=smoothValueE1
+        //     }
+        //     else{
+        //         updateItemE1.textContent="0";
+        //     }
+           
+        // }
+
+        // plusBtn.onclick=function(){
+            
+        //     let updateItem = document.getElementById('quantityComplex');
+        //     let displayValue = updateItem.textContent;
+        //     let smoothValue = parseInt(displayValue);
+        //     smoothValue++;
+                    
+        //     updateItem.textContent=smoothValue;
+
+        //     let originalPriceElement = document.getElementById("originalRateValue");
+        //     let discountPriceElement = document.getElementById("priceRateValue");
+
+        //     let itemPrice = parseFloat(originalPriceElement.textContent.replace("$", ""));
+        //     let newTotal = smoothValue * itemPrice;
+        //     let newDiscountPrice = newTotal * 50 / 100;
+
+        //     originalPriceElement.textContent = "$" + newTotal.toFixed(2);
+        //     discountPriceElement.textContent = "$" + newDiscountPrice.toFixed(2);
+        // }
+
+        
+
+        // cardTwo.append(subBtn,qtyBtn,plusBtn)
+        // Function to update price
+
+
+plusBtn.onclick = function () {
+    let updateItem = document.getElementById(`quantityComplex-${item.id}`);
+    let smoothValue = parseInt(updateItem.textContent);
+    smoothValue++;
+
+    updateItem.textContent = smoothValue;
+    updatePrice(smoothValue, item.id);
+};
+
+subBtn.onclick = function () {
+    let updateItem = document.getElementById(`quantityComplex-${item.id}`);
+    let smoothValue = parseInt(updateItem.textContent);
+
+    if (smoothValue > 1) {
+        smoothValue--;
+        updateItem.textContent = smoothValue;
+        updatePrice(smoothValue, item.id);
+    }
+    else {
+            removeFromCart(item.id);
+            // updateTotalPrice();
+          
+        }
+    // else if(smoothValue <=1){
+    //     viewItemsCard.remove(mediumContainer);
+
+    // }
+};
+
+cardTwo.append(subBtn, qtyBtn, plusBtn);
+
+        
+        let majorOne = document.createElement('div')
+        majorOne.classList.add("major-one")
+
+        let title = document.createElement('h3');
+        title.textContent = item.title;
+        title.classList.add("titleMan");
+
+        let sale = document.createElement('p')
+        sale.classList.add("sales")
+        sale.textContent=item.rating.count+" Sales";
+
+        let rating = document.createElement('div');
+        rating.classList.add("rating");
+
+        for (let l = 0; l <= 3; l++) {
+            let rate = document.createElement('i');
+            rate.classList.add("fa-solid", "fa-star", "gold");
+            rating.append(rate);
+        }
+
+        let rate = document.createElement('i');
+        rate.classList.add("fa-regular", "fa-star-half-stroke", "gold");
+        rate.id = "rateMore";
+        rating.append(rate);
+
+        let otherPriceSection = document.createElement('div')
+        otherPriceSection.classList.add("straight-items")
+
+        let mergeOne = document.createElement('div')
+        mergeOne.classList.add("merge")
+
+        let iconDown = document.createElement('i')
+        iconDown.classList.add("fa-regular","fa-arrow-down","icon-down")
+        
+        let per = document.createElement('p')
+        per.classList.add("per")
+        per.textContent="50%"
+
+        mergeOne.append(iconDown,per)
+        
+        // let originalPrice = document.createElement('p')
+        // originalPrice.classList.add("original-price")
+        // originalPrice.textContent="$"+item.price;
+        // originalPrice.id="originalRateValue";
+        
+
+        // let price = document.createElement('p');
+        // price.classList.add("price-rate");
+        // let total = item.price;
+        // let discountPrice = total * 50 / 100;
+        // price.textContent = "$" + discountPrice;
+        // price.id = "priceRateValue";
+
+        let originalPrice = document.createElement('p');
+        originalPrice.classList.add("original-price");
+        originalPrice.textContent = "$" + item.price;
+        originalPrice.id = `originalRateValue-${item.id}`;
+        originalPrice.dataset.basePrice = item.price; // Store base price
+
+        let price = document.createElement('p');
+        price.classList.add("price-rate");
+        let discountPrice = item.price * 50 / 100;
+        price.textContent = "$" + discountPrice;
+        // price.id = "priceRateValue";
+        price.id = `priceRateValue-${item.id}`;
+
+        otherPriceSection.append(mergeOne,originalPrice,price)
+
+        let lastE1 = document.createElement('div')
+        lastE1.classList.add("last-element")
+
+        let majorHi = document.createElement('div')
+        majorHi.classList.add("card-container11")
+
+        let space = document.createElement('div')
+        space.classList.add("space-man")
+
+        let spaceIcon = document.createElement('i')
+        spaceIcon.classList.add("fa-solid","fa-trash","delete")
+        spaceIcon.onclick = function(){
+            // window.alert("delete")
+            removeFromCart(item.id);
+        }
+        let removeText = document.createElement('p')
+        removeText.classList.add("remove-text")
+        removeText.textContent="Remove";
+        space.append(spaceIcon,removeText)
+        majorHi.append(space)
+        lastE1.append(majorHi)
+        
+
+        majorOne.append(title,sale,rating,otherPriceSection,lastE1)
+
+        twoItemCards.append(cardOne,cardTwo)
+        sectionOperator.append(twoItemCards,majorOne)
+        mediumContainer.append(sectionOperator)
+        viewItemsCard.append(mediumContainer);
+
+        // let sectionOne = document.createElement('div');
+        // sectionOne.classList.add("section-One");
+
+        // let description = document.createElement('div');
+        // description.classList.add("description-class");
+        // description.textContent = item.description;
+
+        // let categoryItem = document.createElement('div')
+        // categoryItem.classList.add("category-Item")
+        // categoryItem.textContent = "Category : ";
+
+        // let spanE3 = document.createElement('span')
+        // spanE3.classList.add("span-E3")
+        // spanE3.textContent = item.category;
+
+        // categoryItem.append(spanE3)
+
+        // sectionOne.append( description, categoryItem);
+        // viewItemsCard.append(sectionOne);
+
+        // let mainHeadSectionTwo = document.createElement('div');
+        // mainHeadSectionTwo.classList.add("main-head");
+
+        // let sectionTwo = document.createElement('div');
+        // sectionTwo.classList.add("section-Two");
+
+        // let spanE1 = document.createElement('span');
+        // spanE1.classList.add("span-Class");
+        // spanE1.style = "display:none";
+        // spanE1.id = "extraPrice";
+
+        // let removeButton = document.createElement('button');
+        // removeButton.classList.add("remove-cart");
+        // removeButton.textContent = "Remove";
+        // removeButton.onclick = function () {
+        //     removeFromCart(item.id);
+        // };
+
+        // sectionTwo.append( spanE1);
+        // mainHeadSectionTwo.append(sectionTwo, removeButton);
+        // viewItemsCard.append(mainHeadSectionTwo);
+
+        cartContainer.appendChild(viewItemsCard);
+    });
+    updateTotalPrice();
+}
+
+// Function to remove item from cart
+function removeFromCart(itemId) {
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    cartItems = cartItems.filter(cartItem => cartItem.id !== itemId);
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+
+    // Refresh cart display
+    displayCartItems();
+    updateTotalPrice();
+}
+
+// Load cart items on page load
+window.onload = function () {
+    displayCartItems();
+};
+
+    </script>
+</body>
+</html>

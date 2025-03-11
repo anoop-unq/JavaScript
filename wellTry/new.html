@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let mainItem = document.createElement('div')
+        let data = localStorage.getItem("details")
+        let exportItem = JSON.parse(data);
+        console.log(exportItem)
+
+        let mainData = exportItem.map(val=>
+        {
+             let child1 = document.createElement('div')
+             let child2 = document.createElement('div')
+
+             child1.innerHTML=val.name;
+             child2.textContent=val.mail
+             mainItem.append(child1,child2)
+        })
+        document.body.append(mainItem)
+        // let array11 = []
+        // array11.push(exportItem)
+        // console.log(array11)
+        // console.log(array11.name)
+    </script>
+</body>
+</html>

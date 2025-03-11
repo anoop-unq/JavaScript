@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="E1">
+    <input type="text" id="E2">
+    <button id="add">add</button>
+    <a href="new.html">
+        <button id="next">nextPage</button>
+    </a>
+    <script>
+        let Add = document.getElementById('add')
+        let Next = document.getElementById('next')
+        let arr1 = []
+        Add.onclick = function(){
+        //    let inputE1 = document.getElementsByTagName;
+        //    let inputE2 = document.getElementsByTagName[1];
+        let inputE1 = document.getElementById('E1')
+        let inputE2 = document.getElementById('E2')
+
+        //    console.log(inputE1.value)
+           let obj = {
+            name:inputE1.value,
+            mail:inputE2.value
+            // values should be taken inside the function 
+           }
+           console.log(obj)
+       
+           arr1.push(obj)
+           console.log(arr1)
+           localStorage.setItem("details",JSON.stringify(arr1))
+
+           inputE1.value="";
+           inputE2.value="";
+        //    let main = localStorage.getItem("details")
+        //    let sky = JSON.parse(main)
+        //    console.log(sky)
+
+        }
+
+        // let btnAdd = document.getElementById('addless');
+        // btnAdd.onclick=function(){
+        //     localStorage.setItem("todoListDetails",JSON.stringify(todoList));
+        // }
+
+        // function onCall(){
+        //     let stringifiedtodoListFromLocalstorage = localStorage.getItem("todoListDetails");
+        //     let parsetodoList = JSON.parse(stringifiedtodoListFromLocalstorage);
+        //     if(parsetodoList === null){
+        //         return [];
+        //     }
+    </script>
+</body>
+</html>

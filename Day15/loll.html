@@ -1,0 +1,212 @@
+<body>
+    <div id="cartContainer"></div>
+    <h2>Total Price: <span id="totalPrice">$0.00</span></h2> <!-- Add this line to display total price -->
+
+    <script>
+        function displayCartItems() {
+            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartContainer = document.getElementById("cartContainer"); 
+            cartContainer.innerHTML = ""; // Clear previous data to avoid duplication
+
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = "<p>Your cart is empty!</p>";
+                document.getElementById("totalPrice").textContent = "$0.00"; // Reset total price
+                return;
+            }
+
+            function updatePrice(quantity, itemId) {
+                let originalPriceElement = document.getElementById(`originalRateValue-${itemId}`);
+                let discountPriceElement = document.getElementById(`priceRateValue-${itemId}`);
+
+                let basePrice = parseFloat(originalPriceElement.dataset.basePrice);
+                let newTotal = quantity * basePrice;
+                let newDiscountPrice = newTotal * 50 / 100;
+
+                originalPriceElement.textContent = "$" + newTotal.toFixed(2);
+                discountPriceElement.textContent = "$" + newDiscountPrice.toFixed(2);
+
+                updateTotalPrice(); // Update total price after every change
+            }
+
+            function updateTotalPrice() {
+                let totalPrice = 0;
+                cartItems.forEach(item => {
+                    let quantity = parseInt(document.getElementById(`quantityComplex-${item.id}`).textContent);
+                    let basePrice = parseFloat(item.price);
+                    let discountedPrice = (basePrice * quantity * 50) / 100;
+                    totalPrice += discountedPrice;
+                });
+
+                document.getElementById("totalPrice").textContent = "$" + totalPrice.toFixed(2);
+            }
+
+            cartItems.forEach(item => {
+                let viewItemsCard = document.createElement('div');
+                viewItemsCard.classList.add("item-class");
+                viewItemsCard.id = `card-${item.id}`;
+
+                let mediumContainer = document.createElement('div');
+                mediumContainer.classList.add("medium-container");
+
+                let sectionOperator = document.createElement('div')
+                sectionOperator.classList.add("section-operator");
+
+                let twoItemCards = document.createElement('div')
+                twoItemCards.classList.add("two-items");
+
+                let cardOne = document.createElement('div');
+                cardOne.classList.add("image-container");
+
+                let imageBag = document.createElement('img');
+                imageBag.classList.add("card-image");
+                imageBag.src = item.image;
+
+                cardOne.append(imageBag);
+
+                let cardTwo = document.createElement('div');
+                cardTwo.classList.add("card-container");
+
+                // Buttons for Quantity Control
+                let subBtn = document.createElement('button');
+                subBtn.classList.add("sub");
+                subBtn.textContent = "-";
+                subBtn.id = `subtractValue-${item.id}`;
+
+                let qtyBtn = document.createElement('button');
+                qtyBtn.classList.add("quantity");
+                qtyBtn.textContent = "Qty: ";
+                qtyBtn.id = `quantityHighComplex-${item.id}`; 
+
+                let spanExpress = document.createElement('span');
+                spanExpress.classList.add("spanned");
+                spanExpress.textContent = "1";
+                spanExpress.id = `quantityComplex-${item.id}`;
+
+                qtyBtn.append(spanExpress);
+
+                let plusBtn = document.createElement('button');
+                plusBtn.classList.add("plus");
+                plusBtn.textContent = "+";
+                plusBtn.id = `addValue-${item.id}`; 
+
+                plusBtn.onclick = function () {
+                    let updateItem = document.getElementById(`quantityComplex-${item.id}`);
+                    let smoothValue = parseInt(updateItem.textContent);
+                    smoothValue++;
+                    updateItem.textContent = smoothValue;
+                    updatePrice(smoothValue, item.id);
+                };
+
+                subBtn.onclick = function () {
+                    let updateItem = document.getElementById(`quantityComplex-${item.id}`);
+                    let smoothValue = parseInt(updateItem.textContent);
+                    if (smoothValue > 1) {
+                        smoothValue--;
+                        updateItem.textContent = smoothValue;
+                        updatePrice(smoothValue, item.id);
+                    }
+                };
+
+                cardTwo.append(subBtn, qtyBtn, plusBtn);
+
+                let majorOne = document.createElement('div');
+                majorOne.classList.add("major-one");
+
+                let title = document.createElement('h3');
+                title.textContent = item.title;
+                title.classList.add("titleMan");
+
+                let sale = document.createElement('p');
+                sale.classList.add("sales");
+                sale.textContent = item.rating.count + " Sales";
+
+                let rating = document.createElement('div');
+                rating.classList.add("rating");
+
+                for (let l = 0; l <= 3; l++) {
+                    let rate = document.createElement('i');
+                    rate.classList.add("fa-solid", "fa-star", "gold");
+                    rating.append(rate);
+                }
+
+                let rate = document.createElement('i');
+                rate.classList.add("fa-regular", "fa-star-half-stroke", "gold");
+                rate.id = "rateMore";
+                rating.append(rate);
+
+                let otherPriceSection = document.createElement('div');
+                otherPriceSection.classList.add("straight-items");
+
+                let mergeOne = document.createElement('div');
+                mergeOne.classList.add("merge");
+
+                let iconDown = document.createElement('i');
+                iconDown.classList.add("fa-regular", "fa-arrow-down", "icon-down");
+
+                let per = document.createElement('p');
+                per.classList.add("per");
+                per.textContent = "50%";
+
+                mergeOne.append(iconDown, per);
+
+                let originalPrice = document.createElement('p');
+                originalPrice.classList.add("original-price");
+                originalPrice.textContent = "$" + item.price;
+                originalPrice.id = `originalRateValue-${item.id}`;
+                originalPrice.dataset.basePrice = item.price;
+
+                let price = document.createElement('p');
+                price.classList.add("price-rate");
+                let discountPrice = item.price * 50 / 100;
+                price.textContent = "$" + discountPrice;
+                price.id = `priceRateValue-${item.id}`;
+
+                otherPriceSection.append(mergeOne, originalPrice, price);
+
+                let lastE1 = document.createElement('div');
+                lastE1.classList.add("last-element");
+
+                let majorHi = document.createElement('div');
+                majorHi.classList.add("card-container");
+
+                let space = document.createElement('div');
+                space.classList.add("space-man");
+
+                let spaceIcon = document.createElement('i');
+                spaceIcon.classList.add("fa-solid", "fa-trash", "delete");
+                spaceIcon.onclick = function () {
+                    removeFromCart(item.id);
+                };
+
+                let removeText = document.createElement('p');
+                removeText.classList.add("remove-text");
+                removeText.textContent = "Remove";
+
+                space.append(spaceIcon, removeText);
+                majorHi.append(space);
+                lastE1.append(majorHi);
+
+                majorOne.append(title, sale, rating, otherPriceSection, lastE1);
+                twoItemCards.append(cardOne, cardTwo);
+                sectionOperator.append(twoItemCards, majorOne);
+                mediumContainer.append(sectionOperator);
+                viewItemsCard.append(mediumContainer);
+
+                cartContainer.appendChild(viewItemsCard);
+            });
+
+            updateTotalPrice(); // Update total price initially
+        }
+
+        function removeFromCart(itemId) {
+            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            cartItems = cartItems.filter(cartItem => cartItem.id !== itemId);
+            localStorage.setItem("cart", JSON.stringify(cartItems));
+            displayCartItems();
+        }
+
+        window.onload = function () {
+            displayCartItems();
+        };
+    </script>
+</body>
